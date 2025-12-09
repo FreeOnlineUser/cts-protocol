@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/cts-protocol/cts/schema/v1.0.0/cts.schema.json",
+  "title": "CTS Protocol",
+  "description": "Cut The Shit — Human Tethering Standard for Agentic AI",
+  "type": "object",
+  "required": ["cts_version", "what", "who", "why"],
+  "properties": {
+    "cts_version": {
+      "type": "string",
+      "description": "Version of the CTS protocol",
+      "enum": ["1.0"]
+    },
+    "what": {
+      "type": "string",
+      "description": "The intent being requested or executed",
+      "minLength": 1
+    },
+    "who": {
+      "type": "object",
+      "description": "The human stake — the mortal, finite person this is for",
+      "required": ["mortal"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the human (can be pseudonymous)"
+        },
+        "mortal": {
+          "type": "boolean",
+          "description": "Acknowledgment that this is for a finite being",
+          "const": true
+        },
+        "context": {
+          "type": "string",
+          "description": "Optional context about who this human is and their situation"
+        }
+      }
+    },
+    "why": {
+      "type": "string",
+      "description": "What makes this matter to the human — the meaning, the stakes, the reason",
+      "minLength": 1
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional additional metadata",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this request was created"
+        },
+        "urgency": {
+          "type": "string",
+          "enum": ["low", "normal", "high", "critical"],
+          "description": "How time-sensitive this is to the human"
+        },
+        "chain": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Trace of agents this request has passed through"
+        }
+      }
+    }
+  }
+}
